@@ -4,12 +4,13 @@ const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 var ground1,ground2,block1,block2,block3,block4,block5,block6;
 var block7,block8,block9,block10,block11,block12,block13,block14,block15,block16;
-var block17,block18,block19,block20,block21,block22,block23,block24,block25,ball;
+var block17,block18,block19,block20,block21,block22,block23,block24,block25,ball,score;
 var engine,world;
 function setup() {
   engine = Engine.create();
   world = engine.world;
   createCanvas(800,400);
+  score = 0;
   //createSprite(400, 200, 50, 50);
   ground1 = new Ground(355,350,170,10);
   ground2 = new Ground(620,230,135,10); 
@@ -47,13 +48,15 @@ function setup() {
   block24 = new Box2(635,125,30,40);
   //top level of smaller tower
   block25 = new Box(620,85,30,40);
-  ball = new Ball(100,200,15);
-  elastic = new Elastic(ball.body,{x:100,y:200})
+  ball = new Ball(100,200,30);
+  string = new Elastic(ball.body,{x:100,y:200})
 }
 
 function draw() {
-  rectMode(CENTER);
-  background(56, 44, 44);  
+  background(55, 43, 43);  
+  Engine.update(engine);
+  strokeWeight(0);
+  fill(55, 43, 43);
   block1.display();
   block2.display();
   block3.display();
@@ -82,10 +85,38 @@ function draw() {
   ground1.display();
   ground2.display();
   ball.display();
+  block1.score();
+  block2.score();
+  block3.score();
+  block4.score();
+  block5.score();
+  block6.score();
+  block7.score();
+  block8.score();
+  block9.score();
+  block10.score();
+  block11.score();
+  block12.score();
+  block13.score();
+  block14.score();
+  block15.score();
+  block16.score();
+  block17.score();
+  block18.score();
+  block19.score();
+  block20.score();
+  block21.score();  
+  block22.score();
+  block23.score();
+  block24.score();
+  block25.score();
   //ellipseMode(RADIUS)
  // fill("brown");
   //ellipse(ball.position.x,ball.position.y,15,15);
-  elastic.display();
+ string.display();
+ textSize(20)
+ fill("black")
+ text("score : "+score,550,40)
   drawSprites();
 }
 function mouseDragged(){
@@ -93,12 +124,12 @@ function mouseDragged(){
 }
 
 function mouseReleased(){
-  elastic.fly();
+  string.fly();
 }
 
 function keyPressed(){
   if(keyCode === 32){
-    Matter.Body.setPosition(ball,{x:100,y:200})
-    elastic.attach(ball.body)
+    Matter.Body.setPosition(ball.body,{x:100,y:200})
+    string.attach(ball.body)
   }
 }
